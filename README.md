@@ -23,47 +23,10 @@ be added here once the desktop builds are released.
 - [Tailwind CSS](https://tailwindcss.com/) (via CDN)
 - No build step, framework, or dependencies
 
-## Getting Started
-
-This is a static website — no installation required.
-
-```bash
-git clone https://github.com/gaurify/Remindly.git
-cd Remindly
-open index.html   # or just double-click the file
-```
-
-## Project Structure
-
-```text
-Remindly/
-├── assets/
-│   └── logo.svg
-├── index.html
-├── manual.html
-├── README.md
-├── LICENSE
-└── .gitignore
-```
-
-## Platform Support
-
-Remindly is being built for **Windows** and **macOS**. Desktop
-installers are not available yet — the site clearly marks both as
-"Coming soon" until real builds are published.
-
-The website itself works in any modern browser.
-
-## Manual
-
-See [manual.html](manual.html) for setup steps and frequently asked
-questions.
 
 ## Status
 
-🚧 **In development.** The landing page and manual are complete;
-the desktop application itself has not been released yet.
-
+🚧 **In development.** 
 ## License
 
 Released under the [MIT License](LICENSE).

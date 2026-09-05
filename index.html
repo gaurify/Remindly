@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Remindly — Smart reminders, made simple</title>
+    <title>Remindly — Your hydration reminder, done right</title>
     <meta
         name="description"
-        content="Remindly is a simple desktop reminder app designed to help you stay on track."
+        content="Remindly is a web-based hydration reminder that tracks your water intake and reminds you to drink, even when you're not on the site."
     >
 
     <meta name="theme-color" content="#211f1e">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Remindly — Smart reminders, made simple">
-    <meta property="og:description" content="A lightweight desktop reminder app that helps you remember what matters, exactly when it matters.">
+    <meta property="og:title" content="Remindly — Your hydration reminder, done right">
+    <meta property="og:description" content="Set a hydration goal, get reminded to drink, and track your progress — right from your browser.">
     <meta property="og:image" content="assets/logo.svg">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Remindly — Smart reminders, made simple">
-    <meta name="twitter:description" content="A lightweight desktop reminder app that helps you remember what matters, exactly when it matters.">
+    <meta name="twitter:title" content="Remindly — Your hydration reminder, done right">
+    <meta name="twitter:description" content="Set a hydration goal, get reminded to drink, and track your progress — right from your browser.">
 
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Remindly">
+    <link rel="stylesheet" href="css/app.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -58,13 +63,6 @@
             margin: 0;
             background: #fcfaf6;
             color: #211f1e;
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Helvetica Neue",
-                Helvetica,
-                Arial,
-                sans-serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -90,7 +88,7 @@
         .mockup {
             position: relative;
             width: min(92%, 1200px);
-            min-height: 550px;
+            min-height: 480px;
             overflow: hidden;
             border-radius: 40px;
             background: #151515;
@@ -105,19 +103,13 @@
             bottom: -500px;
             transform: translateX(-50%);
             border-radius: 50%;
-            background:
-                radial-gradient(
-                    circle,
-                    #991b1b 0%,
-                    #450a0a 45%,
-                    #000 75%
-                );
+            background: radial-gradient(circle, #991b1b 0%, #450a0a 45%, #000 75%);
             filter: blur(55px);
             opacity: 0.9;
         }
 
         .app-card {
-            width: min(330px, 90vw);
+            width: min(340px, 90vw);
             background: rgba(30, 28, 26, 0.78);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
@@ -125,19 +117,17 @@
             box-shadow: 0 25px 70px rgba(0,0,0,0.55);
         }
 
-        .download-card {
+        .cta-button {
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .download-card:not(:disabled):hover {
+        .cta-button:hover {
             transform: translateY(-4px);
-            box-shadow: 0 18px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
         }
 
         .social-link {
-            transition:
-                transform 0.2s ease,
-                opacity 0.2s ease;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
         .social-link:hover {
@@ -155,24 +145,12 @@
 
     <header class="w-full px-6 sm:px-10 py-6 flex items-center justify-between">
 
-        <a
-            href="index.html"
-            class="flex items-center gap-3"
-            aria-label="Remindly home"
-        >
-            <img
-                src="assets/logo.svg"
-                alt="Remindly logo"
-                class="w-10 h-10"
-            >
-
-            <span class="text-xl font-bold tracking-tight">
-                Remindly
-            </span>
+        <a href="index.html" class="flex items-center gap-3" aria-label="Remindly home">
+            <img src="assets/logo.svg" alt="Remindly logo" class="w-10 h-10">
+            <span class="text-xl font-bold tracking-tight">Remindly</span>
         </a>
 
         <nav class="flex items-center gap-4 sm:gap-7">
-
             <a
                 href="manual.html"
                 class="text-sm sm:text-base font-semibold hover:opacity-60 transition"
@@ -180,13 +158,20 @@
                 Manual & FAQs
             </a>
 
-            <a
-                href="#downloads"
-                class="hidden sm:inline-flex items-center bg-[#211f1e] text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-black transition"
+            <button
+                type="button"
+                data-install-button
+                class="hidden-init text-sm sm:text-base font-semibold hover:opacity-60 transition"
             >
-                Download
-            </a>
+                Install app
+            </button>
 
+            <a
+                href="auth.html"
+                class="inline-flex items-center bg-[#211f1e] text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-black transition"
+            >
+                Get started
+            </a>
         </nav>
 
     </header>
@@ -198,101 +183,45 @@
 
     <main>
 
-        <section
-            class="w-full flex flex-col items-center text-center px-6 pt-16 sm:pt-20"
-        >
+        <section class="w-full flex flex-col items-center text-center px-6 pt-16 sm:pt-20">
 
-            <h1
-                class="text-5xl sm:text-7xl lg:text-[5.5rem] leading-[1.03] font-extrabold tracking-[-0.04em] max-w-5xl"
-            >
-                Smart
-                <span class="highlight">
-                    reminders
-                </span>
+            <h1 class="text-5xl sm:text-7xl lg:text-[5.5rem] leading-[1.03] font-extrabold tracking-[-0.04em] max-w-5xl">
+                Your friendly
+                <span class="highlight">hydration</span>
                 <br>
-                without the noise.
+                reminder.
             </h1>
 
-            <p
-                class="mt-8 max-w-2xl text-gray-500 text-base sm:text-lg leading-relaxed font-medium"
-            >
-                Remindly is a lightweight desktop reminder app that
-                helps you remember what matters, exactly when it matters.
+            <p class="mt-8 max-w-2xl text-gray-500 text-base sm:text-lg leading-relaxed font-medium">
+                Set a goal, pick an interval, and Remindly nudges you to
+                drink — right in your browser, even when the tab isn't
+                open.
             </p>
 
-
-            <!-- Download Buttons -->
-
-            <div
-                id="downloads"
-                class="mt-10 flex flex-col sm:flex-row items-center gap-4"
-            >
-
-                <!-- Windows: build not yet available. Once a real installer exists at downloads/Remindly-Windows.exe, swap this <button disabled> for a linked, downloadable <a> tag. -->
-
-                <button
-                    type="button"
-                    disabled
-                    aria-disabled="true"
-                    class="download-card inline-flex items-center justify-center gap-3 bg-[#211f1e] text-white px-6 py-4 rounded-2xl text-base font-bold shadow-lg opacity-60 cursor-not-allowed"
+            <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
+                <a
+                    href="auth.html"
+                    class="cta-button inline-flex items-center justify-center gap-2 bg-[#211f1e] text-white px-8 py-4 rounded-2xl text-base font-bold shadow-lg hover:bg-black transition"
                 >
-
-                    <svg
-                        class="w-5 h-5"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path d="M3 5.2 10.7 4v7.3H3V5.2Zm0 13.6 7.7 1.2V12.7H3v6.1ZM11.8 3.8 21 2.5v8.8h-9.2V3.8Zm0 9.1H21v8.6l-9.2-1.3v-7.3Z"/>
-                    </svg>
-
-                    <span class="flex flex-col items-start leading-tight">
-                        <span>Windows</span>
-                        <span class="text-xs font-medium opacity-70">Coming soon</span>
-                    </span>
-
-                </button>
-
-
-                <!-- macOS: build not yet available. Once a real installer exists at downloads/Remindly-macOS.dmg, swap this <button disabled> for a linked, downloadable <a> tag. -->
-
-                <button
-                    type="button"
-                    disabled
-                    aria-disabled="true"
-                    class="download-card inline-flex items-center justify-center gap-3 bg-gray-100 text-[#211f1e] px-6 py-4 rounded-2xl text-base font-bold opacity-60 cursor-not-allowed"
+                    Get started — it's free
+                </a>
+                <a
+                    href="manual.html"
+                    class="inline-flex items-center justify-center gap-2 bg-gray-100 text-[#211f1e] px-8 py-4 rounded-2xl text-base font-bold hover:bg-gray-200 transition"
                 >
-
-                    <svg
-                        class="w-5 h-5"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path d="M16.8 12.7c0-2 1.6-3 1.7-3.1-.9-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.5.8-3.2 1.9-1.4 2.4-.4 5.9 1 7.8.7.9 1.5 1.9 2.6 1.9 1 0 1.4-.6 2.7-.6 1.2 0 1.6.6 2.6.6 1.1 0 1.8-.9 2.5-1.8.8-1 1.1-2.1 1.1-2.1-.1 0-2.5-1-2.5-3Zm-2-6c.6-.8 1-1.8.9-2.7-.9 0-2 .6-2.7 1.3-.6.6-1 1.6-.9 2.6 1 0 2-.5 2.7-1.2Z"/>
-                    </svg>
-
-                    <span class="flex flex-col items-start leading-tight">
-                        <span>macOS</span>
-                        <span class="text-xs font-medium opacity-70">Coming soon</span>
-                    </span>
-
-                </button>
-
+                    See how it works
+                </a>
             </div>
-
 
             <div class="mt-5 flex items-center gap-3 text-sm text-gray-500">
-                <span class="font-semibold">
-                    Windows & macOS
-                </span>
-
+                <span class="font-semibold">Works in your browser</span>
                 <span class="w-1 h-1 rounded-full bg-gray-400"></span>
-
-                <span>
-                    Builds coming soon
-                </span>
+                <span>No install required</span>
             </div>
+
+            <p data-ios-install-hint class="hidden-init mt-4 text-xs text-gray-400 max-w-xs">
+                On iPhone or iPad: tap the Share icon, then "Add to Home Screen" to install Remindly.
+            </p>
 
         </section>
 
@@ -301,150 +230,43 @@
              APP PREVIEW
         ========================== -->
 
-        <section
-            class="w-full flex justify-center mt-16 sm:mt-20 px-4"
-        >
+        <section class="w-full flex justify-center px-4 sm:px-6 mt-20 mb-24">
 
-            <div class="mockup">
-
+            <div class="mockup flex items-center justify-center">
                 <div class="mockup-glow"></div>
 
-
-                <div
-                    class="absolute inset-0 flex items-center justify-center p-6"
-                >
-
-                    <div class="app-card rounded-3xl p-5 text-white">
-
-                        <!-- Card Header -->
-
-                        <div class="flex items-center gap-3 mb-5">
-
-                            <div
-                                class="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center"
-                            >
-                                <span class="text-lg">
-                                    R
-                                </span>
-                            </div>
-
-                            <div>
-
-                                <h3 class="font-bold">
-                                    Remindly
-                                </h3>
-
-                                <p class="text-xs text-white/45">
-                                    Set a reminder. Stay on track.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="h-px bg-white/10 mb-5"></div>
-
-
-                        <!-- Message -->
-
-                        <div class="mb-5">
-
-                            <label
-                                class="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2"
-                            >
-                                Reminder
-                            </label>
-
-                            <div
-                                class="bg-black/40 border border-white/10 rounded-xl px-4 py-3"
-                            >
-
-                                <span class="text-sm font-medium">
-                                    Time to focus on your next task.
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Schedule -->
-
-                        <div class="mb-5">
-
-                            <label
-                                class="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2"
-                            >
-                                Schedule
-                            </label>
-
-                            <div
-                                class="bg-black/40 border border-white/10 rounded-xl p-3 flex items-center justify-between"
-                            >
-
-                                <div class="flex items-center gap-2">
-
-                                    <div
-                                        class="bg-black/50 rounded-lg px-3 py-2 font-mono font-bold"
-                                    >
-                                        08
-                                    </div>
-
-                                    <span class="text-white/40">
-                                        :
-                                    </span>
-
-                                    <div
-                                        class="bg-black/50 rounded-lg px-3 py-2 font-mono font-bold"
-                                    >
-                                        00
-                                    </div>
-
-                                </div>
-
-                                <span
-                                    class="text-xs font-bold text-white/60"
-                                >
-                                    AM
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Status -->
-
-                        <div
-                            class="flex items-center justify-center gap-2 mb-4"
-                        >
-
-                            <span
-                                class="w-1.5 h-1.5 rounded-full bg-red-500"
-                            ></span>
-
-                            <span
-                                class="text-[10px] uppercase tracking-wider text-white/45 font-bold"
-                            >
-                                Reminder ready
-                            </span>
-
-                        </div>
-
-
-                        <!-- Button -->
-
-                        <button
-                            class="w-full bg-gradient-to-b from-red-500 to-red-700 text-white py-3 rounded-xl font-bold text-sm shadow-lg"
-                        >
-                            Set Reminder
-                        </button>
-
+                <div class="app-card relative z-10 rounded-3xl p-7 text-white">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-white/70">Today</span>
+                        <span class="text-sm font-semibold text-white/70">72%</span>
                     </div>
 
-                </div>
+                    <div class="mt-6 flex items-center justify-center">
+                        <svg viewBox="0 0 120 120" class="w-40 h-40">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="10" />
+                            <circle
+                                cx="60" cy="60" r="54" fill="none" stroke="#ef4444" stroke-width="10"
+                                stroke-linecap="round"
+                                stroke-dasharray="339.3"
+                                stroke-dashoffset="95"
+                                transform="rotate(-90 60 60)"
+                            />
+                        </svg>
+                    </div>
 
+                    <p class="text-center text-2xl font-extrabold mt-2">1,440 <span class="text-white/50 text-base font-semibold">/ 2,000 ml</span></p>
+
+                    <div class="mt-6 grid grid-cols-3 gap-2">
+                        <div class="bg-white/10 rounded-xl py-2 text-center text-sm font-bold">+100</div>
+                        <div class="bg-white/10 rounded-xl py-2 text-center text-sm font-bold">+250</div>
+                        <div class="bg-white/10 rounded-xl py-2 text-center text-sm font-bold">+500</div>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between text-xs text-white/50">
+                        <span>Next reminder</span>
+                        <span class="text-white font-semibold">3:45 PM</span>
+                    </div>
+                </div>
             </div>
 
         </section>
@@ -454,97 +276,35 @@
              HOW IT WORKS
         ========================== -->
 
-        <section
-            class="w-full flex flex-col items-center px-6 pt-24 sm:pt-32 pb-20"
-        >
+        <section class="w-full max-w-5xl mx-auto px-6 pb-24">
 
-            <h2
-                class="text-4xl sm:text-5xl font-extrabold tracking-tight text-center"
-            >
-                How it works
-            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
 
-            <p
-                class="mt-5 text-gray-500 text-center max-w-xl leading-relaxed"
-            >
-                Three simple steps to keep your day moving in the
-                right direction.
-            </p>
-
-
-            <div
-                class="flex flex-col sm:flex-row max-w-5xl w-full gap-12 sm:gap-8 mt-16"
-            >
-
-                <!-- Step 1 -->
-
-                <div class="flex-1 text-center">
-
-                    <div
-                        class="w-14 h-14 mx-auto rounded-2xl bg-[#211f1e] text-white flex items-center justify-center text-xl font-bold shadow-lg"
-                    >
-                        1
-                    </div>
-
-                    <h3 class="mt-6 text-xl font-bold">
-                        Install Remindly
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed max-w-xs mx-auto"
-                    >
-                        Download the version for your operating
-                        system and launch the app.
+                <div>
+                    <div class="w-12 h-12 mx-auto rounded-full bg-[#211f1e] text-white flex items-center justify-center font-bold text-lg">1</div>
+                    <h3 class="mt-6 text-xl font-bold">Set your goal</h3>
+                    <p class="mt-3 text-gray-500 leading-relaxed max-w-xs mx-auto">
+                        Pick a daily hydration goal and a reminder interval
+                        that fits your day.
                     </p>
-
                 </div>
 
-
-                <!-- Step 2 -->
-
-                <div class="flex-1 text-center">
-
-                    <div
-                        class="w-14 h-14 mx-auto rounded-2xl bg-[#211f1e] text-white flex items-center justify-center text-xl font-bold shadow-lg"
-                    >
-                        2
-                    </div>
-
-                    <h3 class="mt-6 text-xl font-bold">
-                        Create a reminder
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed max-w-xs mx-auto"
-                    >
-                        Add your message and choose exactly when
-                        you want to be reminded.
+                <div>
+                    <div class="w-12 h-12 mx-auto rounded-full bg-[#211f1e] text-white flex items-center justify-center font-bold text-lg">2</div>
+                    <h3 class="mt-6 text-xl font-bold">Get reminded</h3>
+                    <p class="mt-3 text-gray-500 leading-relaxed max-w-xs mx-auto">
+                        Allow notifications and Remindly nudges you — on
+                        the site or off it.
                     </p>
-
                 </div>
 
-
-                <!-- Step 3 -->
-
-                <div class="flex-1 text-center">
-
-                    <div
-                        class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-b from-red-500 to-red-700 text-white flex items-center justify-center text-xl font-bold shadow-lg"
-                    >
-                        3
-                    </div>
-
-                    <h3 class="mt-6 text-xl font-bold">
-                        Stay on track
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed max-w-xs mx-auto"
-                    >
-                        Let Remindly take care of the timing while
-                        you focus on what matters.
+                <div>
+                    <div class="w-12 h-12 mx-auto rounded-full bg-[#211f1e] text-white flex items-center justify-center font-bold text-lg">3</div>
+                    <h3 class="mt-6 text-xl font-bold">Track your progress</h3>
+                    <p class="mt-3 text-gray-500 leading-relaxed max-w-xs mx-auto">
+                        Log water in a tap and watch your daily progress
+                        fill in.
                     </p>
-
                 </div>
 
             </div>
@@ -556,132 +316,35 @@
              FEATURES
         ========================== -->
 
-        <section
-            class="w-full max-w-5xl mx-auto px-6 pb-24"
-        >
+        <section class="w-full max-w-5xl mx-auto px-6 pb-24">
 
-            <div
-                class="grid grid-cols-1 sm:grid-cols-3 gap-5"
-            >
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
 
-                <div
-                    class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm"
-                >
-
-                    <div class="text-2xl mb-5">
-                        ⏰
-                    </div>
-
-                    <h3 class="text-lg font-bold">
-                        Timely reminders
-                    </h3>
-
+                <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm">
+                    <div class="text-2xl mb-5">💧</div>
+                    <h3 class="text-lg font-bold">Built for hydration</h3>
                     <p class="mt-3 text-sm text-gray-500 leading-relaxed">
-                        Set reminders for specific times and keep
-                        important tasks from slipping through the cracks.
+                        Not a general to-do app — just your water intake,
+                        your goal, and your reminders.
                     </p>
-
                 </div>
 
-
-                <div
-                    class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm"
-                >
-
-                    <div class="text-2xl mb-5">
-                        ⚡
-                    </div>
-
-                    <h3 class="text-lg font-bold">
-                        Lightweight
-                    </h3>
-
+                <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm">
+                    <div class="text-2xl mb-5">🔔</div>
+                    <h3 class="text-lg font-bold">Reminders that follow you</h3>
                     <p class="mt-3 text-sm text-gray-500 leading-relaxed">
-                        A focused desktop experience without unnecessary
-                        complexity or distracting features.
+                        Once you enable notifications, reminders reach you
+                        even after you close the tab.
                     </p>
-
                 </div>
 
-
-                <div
-                    class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm"
-                >
-
-                    <div class="text-2xl mb-5">
-                        🖥️
-                    </div>
-
-                    <h3 class="text-lg font-bold">
-                        Cross-platform
-                    </h3>
-
+                <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm">
+                    <div class="text-2xl mb-5">⚡</div>
+                    <h3 class="text-lg font-bold">No install, no clutter</h3>
                     <p class="mt-3 text-sm text-gray-500 leading-relaxed">
-                        Remindly is being built for both Windows and
-                        macOS, so you can use whichever platform works
-                        for you.
+                        Remindly runs entirely in your browser — sign up
+                        and start tracking in under a minute.
                     </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             HELP / SECURITY NOTE
-        ========================== -->
-
-        <section
-            class="w-full max-w-4xl mx-auto px-6 pb-24"
-        >
-
-            <div
-                class="bg-red-50 border border-red-100 rounded-3xl p-7 sm:p-8"
-            >
-
-                <div class="flex flex-col sm:flex-row gap-5">
-
-                    <div
-                        class="w-12 h-12 flex-shrink-0 rounded-full bg-red-100 flex items-center justify-center"
-                    >
-
-                        <svg
-                            class="w-6 h-6 text-red-600"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3Z"
-                            />
-                        </svg>
-
-                    </div>
-
-                    <div>
-
-                        <h3
-                            class="text-lg font-bold text-red-900"
-                        >
-                            Installation help
-                        </h3>
-
-                        <p
-                            class="mt-2 text-sm text-red-800 leading-relaxed"
-                        >
-                            If your operating system displays a security
-                            warning when opening Remindly, check your
-                            system's security settings and allow the
-                            application if you trust the downloaded file.
-                        </p>
-
-                    </div>
-
                 </div>
 
             </div>
@@ -695,31 +358,17 @@
          FOOTER
     ========================== -->
 
-    <footer
-        class="border-t border-gray-100 bg-[#fcfaf6] px-6 pt-16 pb-10"
-    >
+    <footer class="border-t border-gray-100 bg-[#fcfaf6] px-6 pt-16 pb-10">
 
-        <div
-            class="max-w-5xl mx-auto flex flex-col items-center text-center"
-        >
+        <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
 
-            <h2
-                class="text-3xl sm:text-4xl font-extrabold tracking-tight"
-            >
-                Remindly
-            </h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Remindly</h2>
 
-            <p
-                class="mt-4 max-w-md text-gray-500 leading-relaxed"
-            >
-                Simple reminders for a more organized day.
+            <p class="mt-4 max-w-md text-gray-500 leading-relaxed">
+                A hydration reminder for a more organized day.
             </p>
 
-
-            <!-- YOUR LINKS ONLY -->
-
             <div class="flex items-center gap-7 mt-8">
-
                 <a
                     href="https://www.linkedin.com/in/gauri-inamdar-55263a419/"
                     target="_blank"
@@ -727,18 +376,10 @@
                     class="social-link text-[#211f1e]"
                     aria-label="Gauri Inamdar on LinkedIn"
                 >
-
-                    <svg
-                        class="w-7 h-7"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
+                    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M20.45 20.45h-3.56v-5.58c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.68H9.35V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.45v6.3ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM3.56 20.45h3.57V8.99H3.56v11.46Z"/>
                     </svg>
-
                 </a>
-
 
                 <a
                     href="https://github.com/gaurify"
@@ -747,47 +388,23 @@
                     class="social-link text-[#211f1e]"
                     aria-label="Gauri Inamdar on GitHub"
                 >
-
-                    <svg
-                        class="w-7 h-7"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
+                    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2.18c-3.22.7-3.9-1.55-3.9-1.55-.53-1.37-1.3-1.73-1.3-1.73-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.57-.29-5.28-1.28-5.28-5.7 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.95 10.95 0 0 1 5.76 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.82 1.19 3.08 0 4.43-2.71 5.4-5.29 5.69.42.36.78 1.07.78 2.16v3.2c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/>
                     </svg>
-
                 </a>
-
             </div>
 
-
-            <!-- CREDIT -->
-
-            <div
-                class="w-full border-t border-gray-200 mt-12 pt-7"
-            >
-
-                <p
-                    class="text-sm text-gray-500"
-                >
-                    Created by
-                    <span class="font-semibold text-[#211f1e]">
-                        Gauri Inamdar
-                    </span>
+            <div class="w-full border-t border-gray-200 mt-12 pt-7">
+                <p class="text-sm text-gray-500">
+                    Created by <span class="font-semibold text-[#211f1e]">Gauri Inamdar</span>
                 </p>
-
-                <p
-                    class="mt-2 text-xs text-gray-400"
-                >
-                    © 2026 Remindly. All rights reserved.
-                </p>
-
+                <p class="mt-2 text-xs text-gray-400">© 2026 Remindly. All rights reserved.</p>
             </div>
 
         </div>
 
     </footer>
-
+    <script src="js/register-sw.js"></script>
+    <script src="js/install-prompt.js"></script>
 </body>
 </html>

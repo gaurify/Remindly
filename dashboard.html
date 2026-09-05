@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard — Remindly</title>
+    <meta name="description" content="Track your hydration and manage your Remindly reminders.">
+    <meta name="theme-color" content="#211f1e">
+
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Remindly">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { background: "#fcfaf6", dark: "#211f1e", accent: "#ef4444" }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            background: #fcfaf6;
+            color: #211f1e;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="w-full px-6 sm:px-10 py-6 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3" aria-label="Remindly home">
+            <img src="assets/logo.svg" alt="Remindly logo" class="w-9 h-9">
+            <span class="text-lg font-bold tracking-tight">Remindly</span>
+        </a>
+
+        <div class="flex items-center gap-4 text-sm">
+            <span id="user-email" class="hidden sm:inline text-gray-500"></span>
+            <button
+                type="button"
+                data-install-button
+                class="hidden-init font-semibold hover:opacity-60 transition"
+            >
+                Install app
+            </button>
+            <a href="manual.html" class="font-semibold hover:opacity-60 transition">Manual</a>
+            <button
+                id="logout-btn"
+                type="button"
+                class="font-semibold text-accent hover:opacity-70 transition"
+            >
+                Log out
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 pb-24">
+
+        <!-- =========================
+             HYDRATION TRACKER
+        ========================== -->
+
+        <section class="bg-[#211f1e] text-white rounded-3xl p-8 sm:p-10 mt-4">
+
+            <div class="flex flex-col sm:flex-row items-center gap-8">
+
+                <div class="relative w-44 h-44 flex-shrink-0">
+                    <svg viewBox="0 0 120 120" class="w-full h-full progress-ring">
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="10" />
+                        <circle
+                            id="progress-ring-fill"
+                            cx="60" cy="60" r="54" fill="none" stroke="#ef4444" stroke-width="10"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span id="percent-label" class="text-3xl font-extrabold">0%</span>
+                    </div>
+                </div>
+
+                <div class="flex-1 text-center sm:text-left">
+                    <p class="text-white/60 text-sm font-semibold">Today's hydration</p>
+                    <p class="mt-1 text-3xl font-extrabold">
+                        <span id="total-ml">0</span>
+                        <span class="text-white/50 text-lg font-semibold">/ <span id="goal-ml">2000</span> ml</span>
+                    </p>
+                    <p class="mt-1 text-sm text-white/60"><span id="remaining-ml">2000</span> ml remaining</p>
+
+                    <div class="mt-5 grid grid-cols-3 gap-3 max-w-xs mx-auto sm:mx-0">
+                        <button data-add-ml="100" type="button" class="bg-white/10 hover:bg-white/20 transition rounded-xl py-3 text-sm font-bold">+100 ml</button>
+                        <button data-add-ml="250" type="button" class="bg-white/10 hover:bg-white/20 transition rounded-xl py-3 text-sm font-bold">+250 ml</button>
+                        <button data-add-ml="500" type="button" class="bg-white/10 hover:bg-white/20 transition rounded-xl py-3 text-sm font-bold">+500 ml</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATUS ROW
+        ========================== -->
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-6">
+                <p class="text-sm font-semibold text-gray-500">Next reminder</p>
+                <p id="next-reminder-label" class="mt-1 text-2xl font-extrabold">—</p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-6">
+                <p class="text-sm font-semibold text-gray-500">Notifications</p>
+                <p id="notif-status" class="mt-1 text-2xl font-extrabold">Checking…</p>
+                <p id="notif-explainer" class="mt-2 text-xs text-gray-500 leading-relaxed"></p>
+                <button
+                    id="notif-enable-btn"
+                    type="button"
+                    class="mt-3 text-sm font-bold text-accent hover:opacity-70 transition"
+                >
+                    Enable notifications
+                </button>
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SETTINGS
+        ========================== -->
+
+        <section class="bg-white border border-gray-100 rounded-3xl p-7 sm:p-8 mt-5">
+
+            <h2 class="text-xl font-bold">Reminder settings</h2>
+
+            <form id="settings-form" class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                <div>
+                    <label for="input-goal" class="block text-sm font-semibold mb-1.5">Daily goal (ml)</label>
+                    <input id="input-goal" type="number" min="500" step="100" required
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent">
+                </div>
+
+                <div>
+                    <label for="input-interval" class="block text-sm font-semibold mb-1.5">Reminder interval</label>
+                    <select id="input-interval" required
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent">
+                        <option value="30">Every 30 minutes</option>
+                        <option value="60">Every hour</option>
+                        <option value="120">Every 2 hours</option>
+                        <option value="custom">Custom…</option>
+                    </select>
+                    <input
+                        id="input-interval-custom"
+                        type="number"
+                        min="5"
+                        step="5"
+                        placeholder="Minutes"
+                        class="hidden-init mt-2 w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                    >
+                </div>
+
+                <div>
+                    <label for="input-start" class="block text-sm font-semibold mb-1.5">Start time</label>
+                    <input id="input-start" type="time" required
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent">
+                </div>
+
+                <div>
+                    <label for="input-end" class="block text-sm font-semibold mb-1.5">End time</label>
+                    <input id="input-end" type="time" required
+                        class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent">
+                </div>
+
+                <label class="flex items-center gap-2 sm:col-span-2">
+                    <input id="input-enabled" type="checkbox" class="w-4 h-4 accent-red-500">
+                    <span class="text-sm font-semibold">Reminders enabled</span>
+                </label>
+
+                <button
+                    type="submit"
+                    class="sm:col-span-2 bg-[#211f1e] text-white font-bold py-3 rounded-xl hover:bg-black transition"
+                >
+                    Save settings
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="js/dashboard.js"></script>
+    <script src="js/register-sw.js"></script>
+    <script src="js/install-prompt.js"></script>
+</body>
+</html>

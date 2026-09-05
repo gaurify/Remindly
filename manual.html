@@ -1,478 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Manual & FAQs — Remindly</title>
+    <meta name="description" content="How to use Remindly: setting up hydration reminders, tracking water intake, and enabling notifications.">
+    <meta name="theme-color" content="#211f1e">
 
-    <title>Remindly — Manual & FAQs</title>
-
-    <link
-        rel="icon"
-        href="assets/logo.svg"
-        type="image/svg+xml"
-    >
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Remindly">
+    <link rel="stylesheet" href="css/app.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        background: "#fcfaf6",
-                        dark: "#211f1e"
-                    }
+                    colors: { background: "#fcfaf6", dark: "#211f1e", accent: "#ef4444" }
                 }
             }
         }
     </script>
 
     <style>
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             margin: 0;
             background: #fcfaf6;
             color: #211f1e;
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Helvetica Neue",
-                Helvetica,
-                Arial,
-                sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-
-        .faq-card {
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .faq-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-        }
-
     </style>
-
 </head>
 
 <body>
 
-
-    <!-- HEADER -->
-
-    <header
-        class="w-full px-6 sm:px-10 py-6 flex items-center justify-between"
-    >
-
-        <a
-            href="index.html"
-            class="flex items-center gap-3"
-        >
-
-            <img
-                src="assets/logo.svg"
-                alt="Remindly"
-                class="w-10 h-10"
-            >
-
-            <span
-                class="text-xl font-bold tracking-tight"
-            >
-                Remindly
-            </span>
-
+    <header class="w-full px-6 sm:px-10 py-6 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3" aria-label="Remindly home">
+            <img src="assets/logo.svg" alt="Remindly logo" class="w-10 h-10">
+            <span class="text-xl font-bold tracking-tight">Remindly</span>
         </a>
 
-
-        <a
-            href="index.html"
-            class="text-sm sm:text-base font-bold hover:opacity-60 transition"
-        >
-            Back to Home
-        </a>
-
+        <nav class="flex items-center gap-4 sm:gap-7">
+            <a href="index.html" class="text-sm sm:text-base font-semibold hover:opacity-60 transition">Home</a>
+            <a
+                href="auth.html"
+                class="inline-flex items-center bg-[#211f1e] text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-black transition"
+            >
+                Get started
+            </a>
+        </nav>
     </header>
 
+    <main class="max-w-3xl mx-auto px-6 pb-24">
 
-    <!-- HERO -->
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-center mt-10">Manual & FAQs</h1>
+        <p class="mt-3 text-gray-500 text-center max-w-xl mx-auto">
+            Everything you need to set up hydration reminders and get
+            the most out of Remindly.
+        </p>
 
-    <main
-        class="max-w-4xl mx-auto px-6 pt-16 pb-24"
-    >
+        <!-- =========================
+             GETTING STARTED
+        ========================== -->
 
-        <section class="text-center">
+        <h2 class="text-3xl font-extrabold tracking-tight mt-16">Getting started</h2>
 
-            <h1
-                class="text-5xl sm:text-6xl font-extrabold tracking-tight"
-            >
-                Manual & FAQs
-            </h1>
+        <div class="mt-8 space-y-5">
 
-            <p
-                class="mt-6 text-gray-500 max-w-2xl mx-auto leading-relaxed"
-            >
-                Everything you need to know about installing and
-                using Remindly.
-            </p>
-
-        </section>
-
-
-        <!-- GETTING STARTED -->
-
-        <section class="mt-20">
-
-            <h2
-                class="text-3xl font-extrabold tracking-tight"
-            >
-                Getting started
-            </h2>
-
-            <p class="mt-3 text-sm text-gray-500 leading-relaxed">
-                Windows and macOS builds are currently in development.
-                Here's what the process will look like once downloads
-                are live.
-            </p>
-
-
-            <div class="mt-8 space-y-5">
-
-                <div
-                    class="bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <div
-                        class="flex items-start gap-5"
-                    >
-
-                        <div
-                            class="w-10 h-10 flex-shrink-0 rounded-xl bg-[#211f1e] text-white flex items-center justify-center font-bold"
-                        >
-                            1
-                        </div>
-
-                        <div>
-
-                            <h3 class="text-lg font-bold">
-                                Download Remindly
-                            </h3>
-
-                            <p
-                                class="mt-2 text-gray-500 leading-relaxed"
-                            >
-                                Go to the Remindly home page and
-                                download the version that matches
-                                your operating system.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <div
-                        class="flex items-start gap-5"
-                    >
-
-                        <div
-                            class="w-10 h-10 flex-shrink-0 rounded-xl bg-[#211f1e] text-white flex items-center justify-center font-bold"
-                        >
-                            2
-                        </div>
-
-                        <div>
-
-                            <h3 class="text-lg font-bold">
-                                Install the application
-                            </h3>
-
-                            <p
-                                class="mt-2 text-gray-500 leading-relaxed"
-                            >
-                                Open the downloaded installer and
-                                follow the installation instructions
-                                for your operating system.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <div
-                        class="flex items-start gap-5"
-                    >
-
-                        <div
-                            class="w-10 h-10 flex-shrink-0 rounded-xl bg-gradient-to-b from-red-500 to-red-700 text-white flex items-center justify-center font-bold"
-                        >
-                            3
-                        </div>
-
-                        <div>
-
-                            <h3 class="text-lg font-bold">
-                                Create your first reminder
-                            </h3>
-
-                            <p
-                                class="mt-2 text-gray-500 leading-relaxed"
-                            >
-                                Enter your reminder message, select
-                                the time and activate the reminder.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">1. Create an account</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Go to <a href="auth.html" class="text-accent font-semibold">Get started</a>,
+                    enter an email and password, and sign up. Confirm your
+                    email if prompted, then log in.
+                </p>
             </div>
 
-        </section>
-
-
-        <!-- FAQ -->
-
-        <section class="mt-24">
-
-            <h2
-                class="text-3xl font-extrabold tracking-tight"
-            >
-                Frequently asked questions
-            </h2>
-
-
-            <div class="mt-8 space-y-5">
-
-
-                <div
-                    class="faq-card bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <h3 class="text-lg font-bold">
-                        What is Remindly?
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed"
-                    >
-                        Remindly is a lightweight desktop reminder
-                        app focused on a simple, distraction-free way
-                        to remember important tasks.
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="faq-card bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <h3 class="text-lg font-bold">
-                        Is Remindly free?
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed"
-                    >
-                        Pricing hasn't been finalized yet. Windows
-                        and macOS builds are currently in development,
-                        and pricing details will be shared once they're
-                        released.
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="faq-card bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <h3 class="text-lg font-bold">
-                        Which operating systems are supported?
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed"
-                    >
-                        Remindly is being built for Windows and macOS.
-                        Downloads for both platforms will appear on the
-                        home page once builds are released.
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="faq-card bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <h3 class="text-lg font-bold">
-                        Can I set a custom reminder message?
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed"
-                    >
-                        Yes. You can enter the message that you want
-                        Remindly to display when your reminder is triggered.
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="faq-card bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <h3 class="text-lg font-bold">
-                        What happens if my operating system shows a
-                        security warning?
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed"
-                    >
-                        Operating systems may display security
-                        warnings for applications that are not
-                        distributed through their official stores.
-                        Only allow an application to run if you
-                        obtained it from a source you trust.
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="faq-card bg-white border border-gray-100 rounded-3xl p-7"
-                >
-
-                    <h3 class="text-lg font-bold">
-                        Where can I find updates?
-                    </h3>
-
-                    <p
-                        class="mt-3 text-gray-500 leading-relaxed"
-                    >
-                        Check the Remindly GitHub repository for
-                        future releases and project updates.
-                    </p>
-
-                </div>
-
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">2. Set your hydration goal</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    On your dashboard, open <strong>Reminder settings</strong> and
+                    set a daily goal in millilitres. 2,000 ml is a common
+                    starting point, but any goal works.
+                </p>
             </div>
 
-        </section>
-
-
-        <!-- LINKS -->
-
-        <section
-            class="mt-24 text-center"
-        >
-
-            <h2
-                class="text-2xl font-extrabold"
-            >
-                Follow the project
-            </h2>
-
-            <div
-                class="flex justify-center gap-6 mt-7"
-            >
-
-                <a
-                    href="https://github.com/gaurify"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="px-5 py-3 bg-[#211f1e] text-white rounded-xl font-bold text-sm hover:bg-black transition"
-                >
-                    GitHub
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/in/gauri-inamdar-55263a419/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="px-5 py-3 bg-gray-100 rounded-xl font-bold text-sm hover:bg-gray-200 transition"
-                >
-                    LinkedIn
-                </a>
-
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">3. Choose a reminder interval</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Pick every 30 minutes, hourly, every 2 hours, or set a
+                    custom interval. You can also set a start and end time
+                    so reminders only happen during your day.
+                </p>
             </div>
 
-        </section>
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">4. Enable notifications</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Click <strong>Enable notifications</strong> on your
+                    dashboard and allow the browser prompt. This is what
+                    lets Remindly reach you after you close the tab.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             USING THE DASHBOARD
+        ========================== -->
+
+        <h2 class="text-3xl font-extrabold tracking-tight mt-16">Using the dashboard</h2>
+
+        <div class="mt-8 space-y-5">
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">Recording water</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Use the +100 ml, +250 ml, or +500 ml buttons to log
+                    water as you drink it. Your progress ring and totals
+                    update immediately.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">Understanding your progress</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    The dashboard shows today's total, your remaining
+                    amount, and your progress as a percentage. Totals reset
+                    automatically at the start of each new day.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">Next reminder & reminder status</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Your dashboard always shows when your next reminder is
+                    due, and whether notifications are currently enabled.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             HOW REMINDERS WORK
+        ========================== -->
+
+        <h2 class="text-3xl font-extrabold tracking-tight mt-16">How reminders work</h2>
+
+        <div class="mt-8 space-y-5">
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">While Remindly is open</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    You'll see an animated pop-out reminder appear directly
+                    on the page when it's your time to drink.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">After you close the tab</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Once notifications are enabled, Remindly can send a
+                    real browser push notification even when the site
+                    isn't open — this requires the one-time notification
+                    permission described above.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FAQ
+        ========================== -->
+
+        <h2 class="text-3xl font-extrabold tracking-tight mt-16">FAQ</h2>
+
+        <div class="mt-8 space-y-5">
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">What is Remindly?</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    A web-based hydration reminder. It tracks your water
+                    intake against a daily goal and reminds you to drink
+                    at intervals you choose.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">Do I need to install anything?</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    No. Remindly runs entirely in your browser — there's no
+                    download or app store required.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">What happens if I don't allow notifications?</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Remindly still works while the tab is open — you'll see
+                    the on-page pop-out reminder. Without notification
+                    permission, you won't get reminded once you close the tab.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">I blocked notifications by accident — how do I fix it?</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Open your browser's site settings for Remindly (usually
+                    via the padlock icon in the address bar), find
+                    Notifications, and set it back to "Allow." Then refresh
+                    the dashboard.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">Is my data private?</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Your hydration logs and settings are tied to your
+                    account and protected by row-level security, so only
+                    you can read or write your own data.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-7">
+                <h3 class="text-lg font-bold">Where can I find project updates?</h3>
+                <p class="mt-3 text-gray-500 leading-relaxed">
+                    Check the
+                    <a href="https://github.com/gaurify/Remindly" class="text-accent font-semibold" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+                    for the latest changes.
+                </p>
+            </div>
+
+        </div>
 
     </main>
 
-
-    <!-- FOOTER -->
-
-    <footer
-        class="border-t border-gray-100 px-6 py-10 text-center"
-    >
-
+    <footer class="border-t border-gray-100 bg-[#fcfaf6] px-6 py-10 text-center">
         <p class="text-sm text-gray-500">
-
-            Created by
-            <span class="font-semibold text-[#211f1e]">
-                Gauri Inamdar
-            </span>
-
+            Created by <span class="font-semibold text-[#211f1e]">Gauri Inamdar</span>
         </p>
-
-        <p class="mt-3 text-sm">
+        <div class="flex items-center justify-center gap-6 mt-4">
             <a
                 href="https://github.com/gaurify"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="font-semibold hover:opacity-70 transition"
+                class="text-sm font-semibold hover:opacity-60 transition"
             >
                 GitHub
             </a>
-            <span class="mx-2 text-gray-400">•</span>
             <a
                 href="https://www.linkedin.com/in/gauri-inamdar-55263a419/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="font-semibold hover:opacity-70 transition"
+                class="text-sm font-semibold hover:opacity-60 transition"
             >
                 LinkedIn
             </a>
-        </p>
-
-        <p class="mt-2 text-xs text-gray-400">
-            © 2026 Remindly
-        </p>
-
+        </div>
     </footer>
 
-
+    <script src="js/register-sw.js"></script>
 </body>
 </html>

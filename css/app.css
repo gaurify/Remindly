@@ -1,0 +1,158 @@
+:root {
+    --ink: #211f1e;
+    --paper: #fcfaf6;
+    --accent: #ef4444;
+    --accent-dim: #7f1d1d;
+    --muted: #8a8683;
+    --card: #2a2827;
+    --border: rgba(252, 250, 246, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+}
+
+/* Visible focus states everywhere — never remove outline without replacing it */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+.hidden-init {
+    display: none;
+}
+
+/* ---------- Progress ring ---------- */
+.progress-ring circle {
+    transition: stroke-dashoffset 0.6s ease;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+/* ---------- Reminder pop-out (original mascot, not Spider-Man) ----------
+   A small red "web-dot" swings in on a single thread, settles, then
+   retracts. It's a nod to the swinging motion without depicting the
+   character. */
+.reminder-popout {
+    position: fixed;
+    top: 0;
+    right: 32px;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    animation: popout-drop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.reminder-popout .thread {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(var(--border), var(--accent));
+}
+
+.reminder-popout .bubble {
+    pointer-events: auto;
+    margin-top: -2px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    max-width: 260px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reminder-popout .dot {
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: dot-pulse 1.6s ease-in-out infinite;
+}
+
+.reminder-popout.leaving {
+    animation: popout-retract 0.5s ease-in forwards;
+}
+
+@keyframes popout-drop {
+    0% {
+        transform: translateY(-140px);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(16px);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes popout-retract {
+    to {
+        transform: translateY(-160px);
+        opacity: 0;
+    }
+}
+
+@keyframes dot-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+/* ---------- Toast (for quick-add / save confirmations) ---------- */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--border);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 70;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
